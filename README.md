@@ -21,6 +21,7 @@ DONE
 ```
 
 ### Input Example
+```
 Flagg
 Duke
 Mavericks
@@ -34,15 +35,18 @@ Knueppel
 Duke
 Hornets
 DONE
+```
 
 ## Output
 Players sorted in ascending alphabetical order based on the college name. Players from the same school are sorted by their draft positions.
 
 ### Output Example
+```
 Baylor: Edgecombe, 3, Sixers
 Duke: Flagg, 1, Mavericks
 Duke: Knueppel, 4, Hornets
 Rutgers: Harper, 2, Spurs
+```
 
 ## Key Features
 - Dynamic linked list with sorted insertion
