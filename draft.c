@@ -39,16 +39,17 @@ void freeList(draftPick *player) {
 }
 
 bool goesBefore(draftPick *player1, draftPick *player2) {
+    // compare college names alphabetically
     int comp1 = strcmp(player1->college, player2->college);
     // sort by ascending alphabetical order based on the college name
     if (comp1 < 0) {
-        return true;
+        return true; // player1's college comes first alphabetically
     } else if (comp1 > 0) {
-        return false;
+        return false; // player2's college comes first alphabetically
     } else {
         // players from the same school are sorted by draft positions
-        // so if two players are from the same school, the current player
-        // being compared goes later
+        // so if two players are from the same school, the player with
+        // the lower position goes first
         return player1->pos < player2-> pos;
     }
     
@@ -64,7 +65,7 @@ draftPick* insertPlayer(draftPick *newPlayer, draftPick *head) {
         return newPlayer;
 
     } else {
-        // "current" loops thorugh the list, and we compare with "newPlayer"
+        // "current" loops through the list, and we compare with "newPlayer"
         // on each iteration
         // "previous" points to the thing before "current" so we can
         // insert if needed
@@ -98,11 +99,12 @@ draftPick* insertPlayer(draftPick *newPlayer, draftPick *head) {
     }
 }
 
-// checking syntax
+// checks syntax
 void usage() {
     printf("Syntax: ./sequence <fileName.txt>\n");
 }
 
+// removes the newline char from the end of a string
 void chomp(char *s) {
     s[strcspn(s, "\n")] = '\0';
 }
@@ -131,16 +133,16 @@ int main(int argc, char *argv[]) {
         // remove "\n" from each line
         chomp(buffer);
 
-        // stop executing if "DONE" encountered
+        // stop reading if "DONE" encountered
         if (strcmp(buffer, "DONE") == 0) {
             break;
         }
 
-        // ADD COMMENT
+        // allocate memory for a new node
         draftPick *node = (draftPick*) malloc(sizeof *node);
 
-        // strncpy(destination, source) compies at most n characters from src into dest
-        //    if src is shorter than n: rest of dest has a "\0" tacked onto it
+        // strcpy(dest, src) copies the string from src to dest, including the null terminator
+        // copy the player's name from buffer into the node
         strcpy(node->name, buffer);
 
         // read line 2: the college
